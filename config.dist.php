@@ -10,7 +10,7 @@ $config['type'] = "mysql";
 
 # set agent key
 # ******************************/
-$config['key'] = "aad984d8314fcf644d3fb46886ea461f";
+$config['key'] = getenv("IPAM_KEY") ?: "nokeydefined";
 
 # set scan method and path to ping file
 #	ping, fping or pear
@@ -19,7 +19,7 @@ $config['key'] = "aad984d8314fcf644d3fb46886ea461f";
 //$config['pingpath'] = "/sbin/ping";
 
 $config['method'] 	= "fping";
-$config['pingpath'] = "/usr/local/sbin/fping";
+$config['pingpath'] = "/usr/bin/fping";
 
 # permit non-threaded checks (default: false)
 # ******************************/
@@ -27,7 +27,7 @@ $config['nonthreaded'] = false;
 
 # how many concurrent threads (default: 32)
 # ****************************************/
-$config['threads']  = 32;
+$config['threads']  = getenv("IPAM_THREADS") ?: 5;
 
 # api settings, if api selected
 # ******************************/
@@ -48,11 +48,11 @@ $config['remove_inactive_dhcp']         = false;
 
 # mysql db settings, if mysql selected
 # ******************************/
-$config['db']['host'] = "localhost";
-$config['db']['user'] = "phpipam";
-$config['db']['pass'] = "phpipamadmin";
-$config['db']['name'] = "phpipam";
-$config['db']['port'] = 3306;
+$config['db']['host'] = getenv("IPAM_DB_HOST") ?: "localhost";
+$config['db']['user'] = getenv("IPAM_DB_USER") ?: "phpipam";
+$config['db']['pass'] = getenv("IPAM_DB_PASS") ?: "phpipamadmin";
+$config['db']['name'] = getenv("IPAM_DB_NAME") ?: "phpipam";
+$config['db']['port'] = getenv("IPAM_DB_PORT") ?: 3306;
 
 /**
  *  SSL options for MySQL
